@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">application_base</string>
+    <string name="lb_initial">Início</string>
 </resources>
