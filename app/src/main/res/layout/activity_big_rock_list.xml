@@ -9,13 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.luizmassa.application_base.BigRockListActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/test"/>
+    tools:context=".BigRockListActivity">
 
     <ListView
         android:layout_width="match_parent"
