@@ -1,5 +1,6 @@
 package br.eti.rodrigosiqueira.bigrock;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,16 @@ public class BigRockListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), Long.toString(id), Toast.LENGTH_SHORT).show();
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        Intent intent = new Intent(getApplicationContext(), SliderTarefas.class);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        break;
+                }
             }
         });
     }
