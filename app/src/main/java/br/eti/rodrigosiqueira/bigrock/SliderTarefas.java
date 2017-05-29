@@ -35,7 +35,20 @@ public class SliderTarefas extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new CardTarefa();
+            CardTarefa cardTarefa = new CardTarefa();
+
+            Bundle args = new Bundle();
+            args.putInt("position", position);
+
+            if(position % 2 == 0) {
+                args.putString("background", "#e6e6e6");
+            } else {
+                args.putString("background", "#ff00ff");
+            }
+
+            cardTarefa.setArguments(args);
+
+            return cardTarefa;
         }
 
         @Override
