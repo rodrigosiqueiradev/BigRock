@@ -13,8 +13,9 @@ import java.util.List;
 
 public class BigRockListActivity extends AppCompatActivity {
 
+    private static final int STUDENT_REQUEST_CODE = 200;
     private final String[] options = new String[]{
-      "TAREFAS", "RESUMO", "SINCRONIZAÇÃO"
+      "TAREFAS", "RESUMO"
     };
 
     @Override
@@ -29,6 +30,8 @@ public class BigRockListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        Intent intent1 = new Intent(getApplicationContext(), BigRockGridActivity.class);
+                        startActivity(intent1);
                         break;
                     case 1:
                         Intent intent = new Intent(getApplicationContext(), SliderTarefas.class);

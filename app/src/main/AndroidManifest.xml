@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SliderTarefas"></activity>
+        <activity android:name=".SliderTarefas" />
+        <activity
+            android:name=".BigRockGridActivity"
+            android:label="Lista de Tarefas" />
+        <activity android:name=".BigRockFormActivity"></activity>
     </application>
 
 </manifest>
