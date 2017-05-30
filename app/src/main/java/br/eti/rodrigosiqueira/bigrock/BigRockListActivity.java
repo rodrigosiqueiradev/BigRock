@@ -28,13 +28,14 @@ public class BigRockListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
                 switch (position) {
                     case 0:
-                        Intent intent1 = new Intent(getApplicationContext(), BigRockGridActivity.class);
-                        startActivity(intent1);
+                        intent = new Intent(getApplicationContext(), BigRockGridActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
-                        Intent intent = new Intent(getApplicationContext(), SliderTarefas.class);
+                        intent = new Intent(getApplicationContext(), SliderTarefas.class);
                         startActivity(intent);
                         break;
                     case 2:
