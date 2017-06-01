@@ -7,11 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.List;
-
-public class BigRockListActivity extends AppCompatActivity {
+public class BigRockActivity extends AppCompatActivity {
 
     private static final int STUDENT_REQUEST_CODE = 200;
     private final String[] options = new String[]{
@@ -21,7 +18,7 @@ public class BigRockListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_big_rock_list);
+        setContentView(R.layout.activity_big_rock);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options));

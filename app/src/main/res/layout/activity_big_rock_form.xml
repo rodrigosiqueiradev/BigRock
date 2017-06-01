@@ -11,18 +11,56 @@
         android:text="Back"/>
 
     <EditText
-        android:id="@+id/nmAluno"
+        android:id="@+id/nmBigRock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="@string/nmBigRock"
         android:inputType="text"/>
 
     <EditText
-        android:id="@+id/dsEmail"
+        android:id="@+id/dsBigRock"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:lines="3"
+        android:gravity="top|left"
+        android:hint="@string/dsBigRock"
+        android:inputType="textMultiLine" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/myDatePickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecione a data Inicio da Tarefa"/>
+
+        <TextView android:id="@+id/showMyDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/myDatePickerButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecione a data Final da Tarefa"/>
+
+        <TextView android:id="@+id/showMyDate1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/btnSave"
