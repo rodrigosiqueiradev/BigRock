@@ -6,9 +6,8 @@ import java.util.Calendar;
  * Created by luiz.massa on 03/05/17.
  */
 
-public class BigRock  {
-
-
+public class BigRock {
+    
     private Integer idBigRock;
     private String nmBigRock;
     private String dsBigRock;
@@ -17,6 +16,7 @@ public class BigRock  {
     private Long dtEnd;
     private String nrLat;
     private String nrLng;
+    private Integer idUser;
 
     public Integer getIdBigRock() {
         return idBigRock;
@@ -80,6 +80,14 @@ public class BigRock  {
 
     public void setNrLng(String nrLng) {
         this.nrLng = nrLng;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     @Override

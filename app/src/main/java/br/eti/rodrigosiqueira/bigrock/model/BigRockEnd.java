@@ -6,13 +6,12 @@ package br.eti.rodrigosiqueira.bigrock.model;
 
 public class BigRockEnd {
 
-
     private Integer idBigRockEnd;
     private Integer idBigRock;
     private Long dtEnd;
     private String nrLat;
     private String nrLng;
-
+    private Integer idUser;
 
     public Integer getIdBigRockEnd() {
         return idBigRockEnd;
@@ -52,5 +51,13 @@ public class BigRockEnd {
 
     public void setNrLng(String nrLng) {
         this.nrLng = nrLng;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 }
