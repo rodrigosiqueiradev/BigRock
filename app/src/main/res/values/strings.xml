@@ -7,4 +7,8 @@
     <string name="nmBigRock">Tarefa</string>
     <string name="dsBigRock">Descrição</string>
     <string name="title_activity_big_rock_list">BigRockList</string>
+    <string name="dsBigRockForm">Gereciador de Tarefas</string>
+    <string name="msgBigRockForm">Gerencie suas tarefas aqui</string>
+    <string name="dsBigRockResume">Resumo</string>
+    <string name="msgBigRockResume">Visualise aqui suas tarefas e status</string>
 </resources>
