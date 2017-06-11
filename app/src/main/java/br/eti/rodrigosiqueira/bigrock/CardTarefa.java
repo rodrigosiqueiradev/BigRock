@@ -24,6 +24,9 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import br.eti.rodrigosiqueira.bigrock.model.BigRock;
 
 public class CardTarefa extends Fragment implements OnMapReadyCallback {
 
@@ -32,25 +35,28 @@ public class CardTarefa extends Fragment implements OnMapReadyCallback {
     private LocationListener listener;
     private LocationManager locationManager;
 
+    private BigRock bigRock;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_tarefa, container, false);
+
+        this.bigRock = new Gson().fromJson(getArguments().getString("BigRock"), BigRock.class);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         //PLACEHOLDER FOR TASK CONTENT
         TextView status = (TextView) view.findViewById(R.id.card_status);
-        status.setText("Status Maroto");
+        status.setText(this.bigRock.getTpStatus());
 
         TextView nome = (TextView) view.findViewById(R.id.card_name);
-        nome.setText("Nome do mal");
+        nome.setText(this.bigRock.getNmBigRock());
 
         TextView desc = (TextView) view.findViewById(R.id.card_description);
-        desc.setText("Ta molhado lá fora");
+        desc.setText(this.bigRock.getDsBigRock());
         //PLACEHOLDER FOR TASK CONTENT
 
         //LOAD MAP WITH FAKE LOCATION
@@ -58,55 +64,16 @@ public class CardTarefa extends Fragment implements OnMapReadyCallback {
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
         mapView.getMapAsync(this);
-
-        locationManager = (LocationManager) view.getContext().getSystemService(Context.LOCATION_SERVICE);
-        listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Log.d("CardTarefa","Location: " + location.getLatitude() + ", " + location.getLongitude());
-                mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude())).title("To Aqui"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),location.getLongitude())));
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-
-        if(ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED) {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 10);
-            }
-            return;
-        }
-
-        locationManager.requestLocationUpdates("gps",1000,0,listener);
-
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setAllGesturesEnabled(false);
+
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(this.bigRock.getNrLat()),Double.parseDouble(this.bigRock.getNrLng()))));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(this.bigRock.getNrLat()),Double.parseDouble(this.bigRock.getNrLng())),13.0f));
     }
 
     public CardTarefa() {
