@@ -43,6 +43,17 @@ public class BigRockListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == STUDENT_REQUEST_CODE) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                loadsBigRocks();
+            }
+        }
+    }
+
     public void loadsBigRocks() {
 
         ListView mainListView = (ListView) findViewById(R.id.mainListView);
@@ -56,7 +67,7 @@ public class BigRockListActivity extends AppCompatActivity {
             bigRocksNames.add(bigRock.getNmBigRock());
         }
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bigRocksNames);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bigRocksNames);
         mainListView.setAdapter(adapter);
     }
 
