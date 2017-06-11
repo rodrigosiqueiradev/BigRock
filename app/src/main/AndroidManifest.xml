@@ -28,8 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BigRockActivity"
-            android:label="@string/lb_home" />
+            android:name=".BigRockActivity"/>
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme.Dark" />

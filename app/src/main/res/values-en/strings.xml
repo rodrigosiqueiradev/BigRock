@@ -2,4 +2,15 @@
 <resources>
     <string name="app_name">application_base</string>
     <string name="lb_initial">Initial</string>
+    <string name="btnAdd">Add</string>
+    <string name="dont_have_account">Still don\'t have an account?</string>
+    <string name="dsBigRock">Description</string>
+    <string name="dsBigRockForm">Task manager</string>
+    <string name="dsBigRockResume">Resume</string>
+    <string name="email">Email</string>
+    <string name="enter">Enter</string>
+    <string name="msgBigRockForm">Manage your tasks here</string>
+    <string name="msgBigRockResume">See existing tasks</string>
+    <string name="nmBigRock">Task</string>
+    <string name="password">Password</string>
 </resources>
