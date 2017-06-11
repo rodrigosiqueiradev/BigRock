@@ -53,8 +53,6 @@ public class BigRockDAO extends BaseDAO {
         contentValues.put("NM_BIG_ROCK", bigRock.getNmBigRock());
         contentValues.put("DS_BIG_ROCK", bigRock.getDsBigRock());
         contentValues.put("TP_STATUS", bigRock.getTpStatus());
-        contentValues.put("DT_INSERT", bigRock.getDtInsert().toString());
-        contentValues.put("DT_END", bigRock.getDtEnd().toString());
         contentValues.put("NR_LAT", bigRock.getNrLat());
         contentValues.put("NR_LNG", bigRock.getNrLng());
 

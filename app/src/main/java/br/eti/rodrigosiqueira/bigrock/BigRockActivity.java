@@ -30,7 +30,7 @@ public class BigRockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                intent = new Intent(getApplicationContext(), BigRockGridActivity.class);
+                intent = new Intent(getApplicationContext(), BigRockListActivity.class);
                 startActivity(intent);
             }
         });
@@ -45,21 +45,5 @@ public class BigRockActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    protected void openWindows(int position) {
-        Intent intent;
-        switch (position) {
-            case 0:
-                intent = new Intent(getApplicationContext(), BigRockGridActivity.class);
-                startActivity(intent);
-                break;
-            case 1:
-                intent = new Intent(getApplicationContext(), SliderTarefas.class);
-                startActivity(intent);
-                break;
-            case 2:
-                break;
-        }
     }
 }

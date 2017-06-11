@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.geo.API_KEY"
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBi4GOm-npPLVYtaPOeqdOqzTicEhcnr2M" />
 
         <activity
@@ -26,15 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BigRockActivity"
-                  android:label="@string/lb_home"/>
+        <activity
+            android:name=".BigRockActivity"
+            android:label="@string/lb_home" />
         <activity
             android:name=".SignupActivity"
-            android:theme="@style/AppTheme.Dark"></activity>
+            android:theme="@style/AppTheme.Dark" />
         <activity android:name=".SliderTarefas" />
-        <activity android:name=".BigRockGridActivity"
+        <activity
+            android:name=".BigRockGridActivity"
             android:label="Lista de Tarefas" />
         <activity android:name=".BigRockFormActivity" />
+        <activity
+            android:name=".BigRockListActivity"
+            android:label="@string/title_activity_big_rock_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

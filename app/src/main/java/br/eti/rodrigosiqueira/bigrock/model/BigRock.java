@@ -1,12 +1,13 @@
 package br.eti.rodrigosiqueira.bigrock.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by luiz.massa on 03/05/17.
  */
 
-public class BigRock {
+public class BigRock implements Serializable {
     
     private Integer idBigRock;
     private String nmBigRock;
