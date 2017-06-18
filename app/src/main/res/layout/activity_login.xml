@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp">
 
             <EditText
-                android:id="@+id/edt_email"
+                android:id="@+id/edt_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -44,7 +44,7 @@
             android:layout_marginTop="8dp">
 
             <EditText
-                android:id="@+id/edt_password"
+                android:id="@+id/edt_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
