@@ -43,7 +43,7 @@
             android:name=".BigRockListActivity"
             android:label="@string/title_activity_big_rock_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".BigRocksFullMapActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".BigRocksFullMapActivity"></activity>
     </application>
 
 </manifest>
