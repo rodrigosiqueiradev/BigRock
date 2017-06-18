@@ -1,5 +1,6 @@
 package br.eti.rodrigosiqueira.bigrock;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -37,7 +38,8 @@ public class SliderTarefas extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.view_all:
-                Toast.makeText(this, String.valueOf(item.getItemId()),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, BigRocksFullMapActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -46,9 +48,17 @@ public class SliderTarefas extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_tarefas);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mPager = (ViewPager) findViewById(R.id.pager_tarefa);
         mPagerAdapter = new TarefaPageAdapter(getSupportFragmentManager());

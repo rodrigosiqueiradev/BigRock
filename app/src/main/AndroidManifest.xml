@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -28,13 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".BigRockActivity"/>
+        <activity android:name=".BigRockActivity" />
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".SliderTarefas"
-            android:label="Big Rocks"/>
+        <activity
+            android:name=".SliderTarefas"
+            android:label="Big Rocks" />
         <activity
             android:name=".BigRockGridActivity"
             android:label="Lista de Tarefas" />
@@ -42,7 +42,8 @@
         <activity
             android:name=".BigRockListActivity"
             android:label="@string/title_activity_big_rock_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".BigRocksFullMapActivity" android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
