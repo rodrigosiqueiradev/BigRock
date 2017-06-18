@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import br.eti.rodrigosiqueira.bigrock.async.SignupAsync;
 import br.eti.rodrigosiqueira.bigrock.model.User;
 
 public class SignupActivity extends AppCompatActivity {
@@ -62,6 +63,9 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
+        SignupAsync signupAsync = new SignupAsync(this);
+        signupAsync.execute(user);
+
     }
 
     public boolean validate(User user) {
@@ -90,6 +94,14 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    public void startApp() {
+
+        Intent intent = new Intent(getApplicationContext(), BigRockActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 
     @Override

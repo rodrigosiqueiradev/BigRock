@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin;
     private TextView tvSignup;
+    private EditText edtEmail;
+    private EditText edtPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = (Button) findViewById(R.id.btn_login);
         tvSignup = (TextView) findViewById(R.id.link_signup);
+        edtEmail = (EditText) findViewById(R.id.edt_login_email);
+        edtPassword = (EditText) findViewById(R.id.edt_login_password);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
