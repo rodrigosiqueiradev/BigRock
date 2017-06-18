@@ -1,6 +1,8 @@
 package br.eti.rodrigosiqueira.bigrock;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -49,6 +51,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null || cm.getActiveNetworkInfo() == null || !cm.getActiveNetworkInfo().isConnected()) {
+            Toast.makeText(getBaseContext(), "Sem acesso a internet!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         User user = new User();
         user.setEmail(edtEmail.getText().toString());
