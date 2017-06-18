@@ -18,19 +18,19 @@ import br.eti.rodrigosiqueira.bigrock.model.User;
  * Created by Leonam on 18/06/2017.
  */
 
-public class SignupAsync extends AsyncTask<User, Void, String> {
+public class LoginAsync extends AsyncTask<User, Void, String> {
 
     private Context context;
     private ProgressDialog progress;
 
-    public SignupAsync(Context context) {
+    public LoginAsync(Context context) {
         this.context = context;
     }
 
     @Override
     protected void onPreExecute() {
         progress = new ProgressDialog(context);
-        progress.setMessage("Cadastrando usuário...");
+        progress.setMessage("Entrando...");
         progress.show();
     }
 
@@ -41,7 +41,7 @@ public class SignupAsync extends AsyncTask<User, Void, String> {
         User usuario = user[0];
 
         try {
-            URL url = new URL("http://leonamraone.com/bigrock.php?action=signup");
+            URL url = new URL("http://leonamraone.com/bigrock.php?action=login");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -50,7 +50,6 @@ public class SignupAsync extends AsyncTask<User, Void, String> {
             conn.setDoInput(true);
 
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("nome", usuario.getName());
             jsonParam.put("email", usuario.getEmail());
             jsonParam.put("senha", usuario.getPassword());
 
@@ -77,7 +76,7 @@ public class SignupAsync extends AsyncTask<User, Void, String> {
     protected void onPostExecute(String retorno) {
 
         if (retorno == "1") {
-            progress.setMessage("Usuário Cadastrado com sucesso!");
+            progress.setMessage("Login realizado com sucesso!");
             progress.dismiss();
         } else {
             progress.setMessage("Erro: " + retorno);
