@@ -96,14 +96,6 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void startApp() {
-
-        Intent intent = new Intent(getApplicationContext(), BigRockActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

@@ -2,7 +2,10 @@ package br.eti.rodrigosiqueira.bigrock.async;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -12,6 +15,7 @@ import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import br.eti.rodrigosiqueira.bigrock.BigRockActivity;
 import br.eti.rodrigosiqueira.bigrock.model.User;
 
 /**
@@ -30,7 +34,7 @@ public class LoginAsync extends AsyncTask<User, Void, String> {
     @Override
     protected void onPreExecute() {
         progress = new ProgressDialog(context);
-        progress.setMessage("Entrando...");
+        progress.setMessage("Verificando usuário...");
         progress.show();
     }
 
@@ -51,7 +55,7 @@ public class LoginAsync extends AsyncTask<User, Void, String> {
 
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("email", usuario.getEmail());
-            jsonParam.put("senha", usuario.getPassword());
+            jsonParam.put("password", usuario.getPassword());
 
             PrintStream output = new PrintStream(conn.getOutputStream());
             output.println(jsonParam.toString());
@@ -75,12 +79,31 @@ public class LoginAsync extends AsyncTask<User, Void, String> {
     @Override
     protected void onPostExecute(String retorno) {
 
-        if (retorno == "1") {
-            progress.setMessage("Login realizado com sucesso!");
-            progress.dismiss();
+        boolean parsable = true;
+
+        try {
+            Integer.parseInt(retorno);
+        } catch (NumberFormatException e) {
+            parsable = false;
+        }
+
+        if (parsable) {
+
+            progress.setMessage("Entrando no aplicativo...");
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    progress.dismiss();
+                    context.startActivity(new Intent(context, BigRockActivity.class));
+                }
+            }, 3000);
+
         } else {
-            progress.setMessage("Erro: " + retorno);
+
             progress.dismiss();
+            Toast.makeText(context, retorno, Toast.LENGTH_LONG).show();
+
         }
 
     }
