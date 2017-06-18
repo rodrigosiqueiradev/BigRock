@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.eti.rodrigosiqueira.bigrock.dao.BigRockDAO;
 import br.eti.rodrigosiqueira.bigrock.model.BigRock;
@@ -105,9 +106,29 @@ public class BigRockFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Context context = getApplicationContext();
+                CharSequence text = "Campo Obrigatorio";
+                int duration = Toast.LENGTH_SHORT;
+
+
+
 
                 EditText nmBigRock = (EditText) findViewById(R.id.nmBigRock);
                 EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
+
+                if(nmBigRock.getText().length() == 0) {
+                    //CAMPO OBRIGATORIO
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+
+                if(dsBigRock.getText().length() == 0) {
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+
 
                 BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
 
