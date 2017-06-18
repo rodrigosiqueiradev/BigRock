@@ -13,11 +13,8 @@ public class BigRock implements Serializable {
     private String nmBigRock;
     private String dsBigRock;
     private String tpStatus;
-    private Long dtInsert;
-    private Long dtEnd;
     private String nrLat;
     private String nrLng;
-    private Integer idUser;
 
     public Integer getIdBigRock() {
         return idBigRock;
@@ -51,22 +48,6 @@ public class BigRock implements Serializable {
         this.tpStatus = tpStatus;
     }
 
-    public Long getDtInsert() {
-        return dtInsert;
-    }
-
-    public void setDtInsert(Long dtInsert) {
-        this.dtInsert = dtInsert;
-    }
-
-    public Long getDtEnd() {
-        return dtEnd;
-    }
-
-    public void setDtEnd(Long dtEnd) {
-        this.dtEnd = dtEnd;
-    }
-
     public String getNrLat() {
         return nrLat;
     }
@@ -81,14 +62,6 @@ public class BigRock implements Serializable {
 
     public void setNrLng(String nrLng) {
         this.nrLng = nrLng;
-    }
-
-    public Integer getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
     }
 
     @Override

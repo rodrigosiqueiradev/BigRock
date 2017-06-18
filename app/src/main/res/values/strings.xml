@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">application_base</string>
     <string name="lb_initial">Início</string>
     <string name="btnAdd">Adicionar</string>
     <string name="nmBigRock">Tarefa</string>
@@ -14,4 +13,6 @@
     <string name="enter">Entrar</string>
     <string name="dont_have_account">Ainda não tem uma conta?</string>
     <string name="view_all">Ver Todos</string>
+    <string name="taskList">Lista de Tarefas</string>
+    <string name="taskCreate">Criação</string>
 </resources>

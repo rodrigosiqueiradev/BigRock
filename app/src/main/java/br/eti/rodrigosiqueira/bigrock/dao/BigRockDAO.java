@@ -69,8 +69,6 @@ public class BigRockDAO extends BaseDAO {
         contentValues.put("NM_BIG_ROCK", bigRock.getNmBigRock());
         contentValues.put("DS_BIG_ROCK", bigRock.getDsBigRock());
         contentValues.put("TP_STATUS", bigRock.getTpStatus());
-        contentValues.put("DT_INSERT", bigRock.getDtInsert().toString());
-        contentValues.put("DT_END", bigRock.getDtEnd().toString());
         contentValues.put("NR_LAT", bigRock.getNrLat());
         contentValues.put("NR_LNG", bigRock.getNrLng());
 
@@ -108,8 +106,6 @@ public class BigRockDAO extends BaseDAO {
             bigRock.setNmBigRock(cursor.getString(cursor.getColumnIndex("NM_BIG_ROCK")));
             bigRock.setDsBigRock(cursor.getString(cursor.getColumnIndex("DS_BIG_ROCK")));
             bigRock.setTpStatus(cursor.getString(cursor.getColumnIndex("TP_STATUS")));
-            bigRock.setDtInsert(cursor.getLong(cursor.getColumnIndex("DT_INSERT")));
-            bigRock.setDtEnd(cursor.getLong(cursor.getColumnIndex("DT_END")));
             bigRock.setNrLat(cursor.getString(cursor.getColumnIndex("NR_LAT")));
             bigRock.setNrLng(cursor.getString(cursor.getColumnIndex("NR_LNG")));
 
@@ -129,8 +125,6 @@ public class BigRockDAO extends BaseDAO {
             bigRock.setNmBigRock(cursor.getString(cursor.getColumnIndex("NM_BIG_ROCK")));
             bigRock.setDsBigRock(cursor.getString(cursor.getColumnIndex("DS_BIG_ROCK")));
             bigRock.setTpStatus(cursor.getString(cursor.getColumnIndex("TP_STATUS")));
-            bigRock.setDtInsert(cursor.getLong(cursor.getColumnIndex("DT_INSERT")));
-            bigRock.setDtEnd(cursor.getLong(cursor.getColumnIndex("DT_END")));
             bigRock.setNrLat(cursor.getString(cursor.getColumnIndex("NR_LAT")));
             bigRock.setNrLng(cursor.getString(cursor.getColumnIndex("NR_LNG")));
             bigRocks.add(bigRock);

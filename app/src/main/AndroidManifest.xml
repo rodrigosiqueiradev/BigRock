@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.PERMISSION_GRANTED" />
 
     <application
         android:allowBackup="true"
@@ -35,13 +36,10 @@
         <activity
             android:name=".SliderTarefas"
             android:label="Big Rocks" />
-        <activity
-            android:name=".BigRockGridActivity"
-            android:label="Lista de Tarefas" />
-        <activity android:name=".BigRockFormActivity" />
+        <activity android:name=".BigRockFormActivity" android:label="@string/taskCreate"/>
         <activity
             android:name=".BigRockListActivity"
-            android:label="@string/title_activity_big_rock_list"
+            android:label="@string/taskList"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".BigRocksFullMapActivity"></activity>
     </application>

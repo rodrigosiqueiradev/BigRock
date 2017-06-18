@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"/>
-
     <EditText
         android:id="@+id/nmBigRock"
         android:layout_width="match_parent"
@@ -26,39 +20,12 @@
         android:hint="@string/dsBigRock"
         android:inputType="textMultiLine" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <CheckBox android:id="@+id/ckChecked"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button android:id="@+id/myDatePickerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selecione a data Inicio da Tarefa"/>
-
-        <TextView android:id="@+id/showMyDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button android:id="@+id/myDatePickerButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selecione a data Final da Tarefa"/>
-
-        <TextView android:id="@+id/showMyDate1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
+        android:text="Finalizado?"
+        android:onClick="onCheckboxClicked"/>
 
 
 
@@ -67,5 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save"/>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="Delete"
+        />
 
 </LinearLayout>

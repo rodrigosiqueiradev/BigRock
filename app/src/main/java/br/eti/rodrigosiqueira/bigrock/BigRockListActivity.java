@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +26,13 @@ public class BigRockListActivity extends AppCompatActivity {
     private static final int STUDENT_REQUEST_CODE = 200;
     ArrayList<BigRock> bigRocks = new ArrayList<>();
     private ArrayAdapter<String> adapter;
+    private ListView mainListView;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +41,21 @@ public class BigRockListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btnAdd = (Button) findViewById(R.id.btnAdd);
+        mainListView = (ListView) findViewById(R.id.mainListView);
+
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BigRock bigRock = (BigRock) mainListView.getItemAtPosition(position);
+                Intent intent = new Intent(BigRockListActivity.this, BigRockFormActivity.class);
+                intent.putExtra("bigRock", bigRock);
+                startActivity(intent);
+            }
+        });
+
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         loadsBigRocks();
 
@@ -41,6 +67,12 @@ public class BigRockListActivity extends AppCompatActivity {
                 startActivityForResult(newIntent, STUDENT_REQUEST_CODE);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadsBigRocks();
     }
 
     @Override
@@ -56,18 +88,10 @@ public class BigRockListActivity extends AppCompatActivity {
 
     public void loadsBigRocks() {
 
-        ListView mainListView = (ListView) findViewById(R.id.mainListView);
         BigRockDAO bigRockDAO = new BigRockDAO(this);
         bigRocks = (ArrayList<BigRock>) bigRockDAO.getBigRocks();
 
-
-        ArrayList<String> bigRocksNames = new ArrayList<>();
-
-        for (BigRock bigRock: bigRocks) {
-            bigRocksNames.add(bigRock.getNmBigRock());
-        }
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bigRocksNames);
+        ArrayAdapter<BigRock> adapter = new ArrayAdapter<BigRock>(this, android.R.layout.simple_list_item_1, bigRocks);
         mainListView.setAdapter(adapter);
     }
 

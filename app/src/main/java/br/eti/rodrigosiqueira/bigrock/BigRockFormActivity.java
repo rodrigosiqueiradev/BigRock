@@ -1,57 +1,38 @@
 package br.eti.rodrigosiqueira.bigrock;
 
 import android.Manifest;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.Serializable;
 
 import br.eti.rodrigosiqueira.bigrock.dao.BigRockDAO;
 import br.eti.rodrigosiqueira.bigrock.model.BigRock;
 
 public class BigRockFormActivity extends AppCompatActivity {
 
-    private int mYear;
-    private int mMonth;
-    private int mDay;
-
-    private TextView mDateDisplay;
-    private TextView nDateDisplay1;
-    private Button mPickDate;
-
-    private GoogleMap mMap;
-
-    private LocationListener listener;
-    private LocationManager locationManager;
-
     private Double latitude;
     private Double longitude;
+    private BigRock bigRock = new BigRock();
+    private String tpStatus = "INICIADO";
 
-    static final int DATE_DIALOG_ID = 0;
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -59,87 +40,94 @@ public class BigRockFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_rock_form);
 
-        mDateDisplay = (TextView) findViewById(R.id.showMyDate);
-        nDateDisplay1 = (TextView) findViewById(R.id.showMyDate1);
-        mPickDate = (Button) findViewById(R.id.myDatePickerButton);
-
-        mPickDate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID);
-            }
-        });
-
-        // get the current date
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        // display the current date
-        updateDisplay();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Button btnSave = (Button) findViewById(R.id.btnSave);
-        Button btnBack = (Button) findViewById(R.id.btnBack);
+        Button btnDelete =  (Button) findViewById(R.id.btnDelete);
+
+        Intent intent = getIntent();
+        bigRock = (BigRock) intent.getSerializableExtra("bigRock");
+        try {
+            if(bigRock.getIdBigRock() > 0) {
+                EditText nmBigRock = (EditText) findViewById(R.id.nmBigRock);
+                nmBigRock.setText(bigRock.getNmBigRock());
+                EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
+                dsBigRock.setText(bigRock.getDsBigRock());
+
+                btnDelete.setVisibility(btnDelete.VISIBLE);
+                setTitle("Edição");
+            }
+        } catch (Exception e){
+            tpStatus = "INICIADO";
+        }
 
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        listener = new LocationListener() {
-            @Override
+        // Acquire a reference to the system Location Manager
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
             }
 
-            @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
             }
 
-            @Override
             public void onProviderEnabled(String provider) {
-
             }
 
-            @Override
             public void onProviderDisabled(String provider) {
-
             }
         };
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                        PackageManager.PERMISSION_GRANTED) {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 10);
-            }
+        // Register the listener with the Location Manager to receive location updates
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
-        locationManager.requestLocationUpdates("gps",1000,0,listener);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View v) {
+                BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
+                bigRockDAO.deleteBigRock(bigRock);
+                finish();
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 EditText nmBigRock = (EditText) findViewById(R.id.nmBigRock);
                 EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
 
-
-                BigRock bigRock = new BigRock();
                 BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
 
                 bigRock.setNmBigRock(nmBigRock.getText().toString());
                 bigRock.setDsBigRock(dsBigRock.getText().toString());
-                bigRock.setTpStatus("INICIADO");
+                bigRock.setTpStatus(tpStatus);
                 bigRock.setNrLat(latitude.toString());
                 bigRock.setNrLng(longitude.toString());
 
-                bigRock = bigRockDAO.insertBigRock(bigRock);
+                try {
+                    if(bigRock.getIdBigRock() > 0) {
+                        bigRock = bigRockDAO.updateBigRock(bigRock);
+                    } else {
+                        bigRock = bigRockDAO.insertBigRock(bigRock);
+                    }
+                }catch (Exception e) {
+                    bigRock = bigRockDAO.insertBigRock(bigRock);
+                }
+
+
 
                 Intent newIntent = getIntent().putExtra("bigRock", bigRock);
                 setResult(RESULT_OK, newIntent);
@@ -147,44 +135,21 @@ public class BigRockFormActivity extends AppCompatActivity {
 
             }
         });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
 
-    private void updateDisplay() {
-        this.mDateDisplay.setText(
-                new StringBuilder()
-                        // Month is 0 based so add 1
-                        .append(mMonth + 1).append("/")
-                        .append(mDay).append("/")
-                        .append(mYear).append(" "));
-    }
-
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-                public void onDateSet(DatePicker view, int year,
-                                      int monthOfYear, int dayOfMonth) {
-                    mYear = year;
-                    mMonth = monthOfYear;
-                    mDay = dayOfMonth;
-                    updateDisplay();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.ckChecked:
+                if (checked) {
+                    tpStatus = "FINALIZADO";
+                } else {
+                    tpStatus = "INICIADO";
                 }
-            };
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                return new DatePickerDialog(this,
-                        mDateSetListener,
-                        mYear, mMonth, mDay);
+                break;
         }
-        return null;
     }
 }
