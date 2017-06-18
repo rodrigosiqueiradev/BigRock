@@ -33,7 +33,8 @@
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".SliderTarefas" />
+        <activity android:name=".SliderTarefas"
+            android:label="Big Rocks"/>
         <activity
             android:name=".BigRockGridActivity"
             android:label="Lista de Tarefas" />

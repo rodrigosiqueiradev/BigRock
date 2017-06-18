@@ -1,14 +1,15 @@
 package br.eti.rodrigosiqueira.bigrock;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -18,7 +19,7 @@ import java.util.List;
 import br.eti.rodrigosiqueira.bigrock.dao.BigRockDAO;
 import br.eti.rodrigosiqueira.bigrock.model.BigRock;
 
-public class SliderTarefas extends FragmentActivity {
+public class SliderTarefas extends AppCompatActivity {
 
     private ArrayList<BigRock> bigRocks = new ArrayList<>();
 
@@ -26,7 +27,26 @@ public class SliderTarefas extends FragmentActivity {
     private PagerAdapter mPagerAdapter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_card_view, menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.view_all:
+                Toast.makeText(this, String.valueOf(item.getItemId()),Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_tarefas);
 
