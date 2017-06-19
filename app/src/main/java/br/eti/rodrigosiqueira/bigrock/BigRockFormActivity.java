@@ -27,6 +27,7 @@ public class BigRockFormActivity extends AppCompatActivity {
     private Double latitude;
     private Double longitude;
     private Boolean edit;
+    private Boolean gps;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -41,8 +42,11 @@ public class BigRockFormActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Button btnSave = (Button) findViewById(R.id.btnSave);
+        final Button btnSave = (Button) findViewById(R.id.btnSave);
         Button btnDelete = (Button) findViewById(R.id.btnDelete);
+
+        //btnSave.setEnabled(false);
+        gps = false;
 
         CheckBox checkBox = (CheckBox) findViewById(R.id.ckChecked);
 
@@ -57,9 +61,7 @@ public class BigRockFormActivity extends AppCompatActivity {
             EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
             dsBigRock.setText(bigRock.getDsBigRock());
 
-            if(bigRock.getTpStatus() == getString(R.string.tpStatusInitial)) {
-                checkBox.setChecked(false);
-            } else {
+            if(bigRock.getTpStatus() != getString(R.string.tpStatusInitial)) {
                 checkBox.setChecked(true);
             }
 
@@ -83,45 +85,50 @@ public class BigRockFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (locationManager == null || !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    Toast.makeText(getBaseContext(), getString(R.string.validateGps), Toast.LENGTH_LONG).show();
+                if(gps) {
+                    LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    if (locationManager == null || !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        Toast.makeText(getBaseContext(), getString(R.string.validateGps), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    EditText nmBigRock = (EditText) findViewById(R.id.nmBigRock);
+                    EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
+                    BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
+
+                    if (nmBigRock.getText().toString().isEmpty() || nmBigRock.getText().toString().length() < 4 || nmBigRock.getText().toString().length() > 20) {
+                        nmBigRock.setError(getString(R.string.validadePassword));
+                        return;
+                    } else {
+                        nmBigRock.setError(null);
+                    }
+
+                    if (dsBigRock.getText().toString().isEmpty() || dsBigRock.getText().toString().length() < 4 || dsBigRock.getText().toString().length() > 200) {
+                        dsBigRock.setError(getString(R.string.validateDescription));
+                        return;
+                    } else {
+                        dsBigRock.setError(null);
+                    }
+
+                    bigRock.setNmBigRock(nmBigRock.getText().toString());
+                    bigRock.setDsBigRock(dsBigRock.getText().toString());
+                    bigRock.setTpStatus(tpStatus);
+                    bigRock.setNrLat(latitude.toString());
+                    bigRock.setNrLng(longitude.toString());
+
+                    if (edit) {
+                        bigRock = bigRockDAO.updateBigRock(bigRock);
+                    } else {
+                        bigRock = bigRockDAO.insertBigRock(bigRock);
+                    }
+
+                    Intent newIntent = getIntent().putExtra("bigRock", bigRock);
+                    setResult(RESULT_OK, newIntent);
+                    finish();
+                } else {
+                    Toast.makeText(getBaseContext(), "Buscando GPS...", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                EditText nmBigRock = (EditText) findViewById(R.id.nmBigRock);
-                EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
-                BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
-
-                if (nmBigRock.getText().toString().isEmpty() || nmBigRock.getText().toString().length() < 4 || nmBigRock.getText().toString().length() > 20) {
-                    nmBigRock.setError(getString(R.string.validadePassword));
-                    return;
-                } else {
-                    nmBigRock.setError(null);
-                }
-
-                if (dsBigRock.getText().toString().isEmpty() || dsBigRock.getText().toString().length() < 4 || dsBigRock.getText().toString().length() > 200) {
-                    dsBigRock.setError(getString(R.string.validateDescription));
-                    return;
-                } else {
-                    dsBigRock.setError(null);
-                }
-
-                bigRock.setNmBigRock(nmBigRock.getText().toString());
-                bigRock.setDsBigRock(dsBigRock.getText().toString());
-                bigRock.setTpStatus(tpStatus);
-                bigRock.setNrLat(latitude.toString());
-                bigRock.setNrLng(longitude.toString());
-
-                if (edit) {
-                    bigRock = bigRockDAO.updateBigRock(bigRock);
-                } else {
-                    bigRock = bigRockDAO.insertBigRock(bigRock);
-                }
-
-                Intent newIntent = getIntent().putExtra("bigRock", bigRock);
-                setResult(RESULT_OK, newIntent);
-                finish();
 
             }
         });
@@ -136,6 +143,7 @@ public class BigRockFormActivity extends AppCompatActivity {
                 // Called when a new location is found by the network location provider.
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                gps = true;
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
