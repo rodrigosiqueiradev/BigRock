@@ -44,6 +44,8 @@ public class BigRockFormActivity extends AppCompatActivity {
         Button btnSave = (Button) findViewById(R.id.btnSave);
         Button btnDelete = (Button) findViewById(R.id.btnDelete);
 
+        CheckBox checkBox = (CheckBox) findViewById(R.id.ckChecked);
+
         Intent intent = getIntent();
         bigRock = (BigRock) intent.getSerializableExtra("bigRock");
         if (bigRock == null) {
@@ -55,10 +57,18 @@ public class BigRockFormActivity extends AppCompatActivity {
             EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
             dsBigRock.setText(bigRock.getDsBigRock());
 
+            if(bigRock.getTpStatus() == getString(R.string.tpStatusInitial)) {
+                checkBox.setChecked(false);
+            } else {
+                checkBox.setChecked(true);
+            }
+
             btnDelete.setVisibility(btnDelete.VISIBLE);
             setTitle(getString(R.string.edit));
             edit = true;
         }
+
+        this.onCheckboxClicked(checkBox);
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
