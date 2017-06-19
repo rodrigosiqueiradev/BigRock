@@ -41,7 +41,7 @@
             android:name=".BigRockListActivity"
             android:label="@string/taskList"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".BigRocksFullMapActivity" android:label="viewAll"></activity>
+        <activity android:name=".BigRocksFullMapActivity" android:label="viewAll"/>
     </application>
 
 </manifest>
