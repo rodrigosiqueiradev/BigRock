@@ -1,46 +1,67 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="56dp">
 
-    <EditText
-        android:id="@+id/nmBigRock"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nmBigRock"
-        android:inputType="text"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp">
 
-    <EditText
-        android:id="@+id/dsBigRock"
-        android:layout_width="fill_parent"
+        <EditText
+            android:id="@+id/nmBigRock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nmBigRock"
+            android:inputType="text" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="3"
-        android:gravity="top|left"
-        android:hint="@string/dsBigRock"
-        android:inputType="textMultiLine" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp">
 
+        <EditText
+            android:id="@+id/dsBigRock"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:hint="@string/dsBigRock"
+            android:inputType="textMultiLine"
+            android:lines="3" />
 
-    <CheckBox android:id="@+id/ckChecked"
+    </android.support.design.widget.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/ckChecked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finalizado?"
-        android:onClick="onCheckboxClicked"/>
+        android:onClick="onCheckboxClicked"
+        android:text="Finalizado?" />
 
 
-
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"/>
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:text="Save" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:text="Delete"
-        />
+        android:visibility="invisible" />
 
 </LinearLayout>
