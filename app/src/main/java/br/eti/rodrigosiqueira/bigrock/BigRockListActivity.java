@@ -3,18 +3,13 @@ package br.eti.rodrigosiqueira.bigrock;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -53,7 +48,6 @@ public class BigRockListActivity extends AppCompatActivity {
         });
 
 
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -90,6 +84,12 @@ public class BigRockListActivity extends AppCompatActivity {
 
         BigRockDAO bigRockDAO = new BigRockDAO(this);
         bigRocks = (ArrayList<BigRock>) bigRockDAO.getBigRocks();
+
+        if (bigRocks.size() == 0) {
+            Intent newIntent = new Intent(BigRockListActivity.this, BigRockFormActivity.class);
+            startActivityForResult(newIntent, STUDENT_REQUEST_CODE);
+            finish();
+        }
 
         ArrayAdapter<BigRock> adapter = new ArrayAdapter<BigRock>(this, android.R.layout.simple_list_item_1, bigRocks);
         mainListView.setAdapter(adapter);
