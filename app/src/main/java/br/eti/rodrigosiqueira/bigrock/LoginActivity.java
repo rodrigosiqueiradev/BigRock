@@ -29,7 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                                            Manifest.permission.INTERNET,
+                                                            Manifest.permission.ACCESS_NETWORK_STATE,
+                                                            Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 
