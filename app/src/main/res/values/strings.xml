@@ -15,7 +15,7 @@
     <string name="view_all">Ver Todos</string>
     <string name="taskList">Lista de Tarefas</string>
     <string name="taskCreate">Criação</string>
-    <string name="bigRockApp">Big Rock</string>
+    <string name="bigRockApp" translatable="false">Big Rock</string>
     <string name="name">Nome</string>
     <string name="createAccont">Criar Conta</string>
     <string name="youAreUser">Já é um usuário?</string>

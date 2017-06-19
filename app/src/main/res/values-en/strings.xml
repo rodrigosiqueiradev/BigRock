@@ -14,4 +14,26 @@
     <string name="nmBigRock">Task</string>
     <string name="password">Password</string>
     <string name="view_all">View All</string>
+    <string name="createAccont">Create account</string>
+    <string name="delete">Delete</string>
+    <string name="dsEnd">Finished?</string>
+    <string name="edit">Edit</string>
+    <string name="name">Name</string>
+    <string name="noCanCreate">Not possible to create account</string>
+    <string name="noInternetAccess">No internet available</string>
+    <string name="save">Save</string>
+    <string name="taskCreate">Create</string>
+    <string name="taskList">Task list</string>
+    <string name="title_activity_big_rock_list" translatable="false"></string>
+    <string name="tpStatusEnd">FINISHED</string>
+    <string name="tpStatusInitial">STARTED</string>
+    <string name="validadeEmail">Inform a valid e-mail address</string>
+    <string name="validadeLogin">Unable to login</string>
+    <string name="validadeName">Name must have at least 3 characters</string>
+    <string name="validadePassword">Password must have between 4 and 20 characters</string>
+    <string name="validateDescription">Password must have between 4 and 200 characters</string>
+    <string name="validateGps">No GPS signal</string>
+    <string name="viewAll">Overview</string>
+    <string name="viewCards">Displaying my Tasks</string>
+    <string name="youAreUser">Already a user?</string>
 </resources>
