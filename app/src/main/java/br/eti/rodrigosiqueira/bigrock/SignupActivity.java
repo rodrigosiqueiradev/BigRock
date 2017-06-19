@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null || cm.getActiveNetworkInfo() == null || !cm.getActiveNetworkInfo().isConnected()) {
-            Toast.makeText(getBaseContext(), "Sem acesso a internet!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), getString(R.string.noInternetAccess), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -67,7 +67,7 @@ public class SignupActivity extends AppCompatActivity {
         user.setPassword(edtPassword.getText().toString());
 
         if (!validate(user)) {
-            Toast.makeText(getBaseContext(), "Não foi possível realizar o cadastro!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), getString(R.string.noCanCreate), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -81,21 +81,21 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         if (user.getName().isEmpty() || user.getName().length() < 3) {
-            edtName.setError("O nome deve conter no mínimo 3 caracteres!");
+            edtName.setError(getString(R.string.validadeName));
             valid = false;
         } else {
             edtName.setError(null);
         }
 
         if (user.getEmail().isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(user.getEmail()).matches()) {
-            edtEmail.setError("Informe um endereço email válido!");
+            edtEmail.setError(getString(R.string.validadeEmail));
             valid = false;
         } else {
             edtEmail.setError(null);
         }
 
         if (user.getPassword().isEmpty() || user.getPassword().length() < 4 || user.getPassword().length() > 20) {
-            edtPassword.setError("A senha deve conter entre 4 e 20 caracteres!");
+            edtPassword.setError(getString(R.string.validadePassword));
             valid = false;
         } else {
             edtPassword.setError(null);

@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
-        android:text="Finalizado?" />
+        android:text="@string/dsEnd" />
 
 
     <android.support.v7.widget.AppCompatButton
@@ -55,13 +55,13 @@
         android:padding="12dp"
         android:textColor="@color/white"
         android:background="@color/colorPrimary"
-        android:text="Save" />
+        android:text="@string/save" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:text="@string/delete"
         android:visibility="invisible" />
 
 </LinearLayout>

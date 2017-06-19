@@ -56,7 +56,7 @@ public class BigRockFormActivity extends AppCompatActivity {
             dsBigRock.setText(bigRock.getDsBigRock());
 
             btnDelete.setVisibility(btnDelete.VISIBLE);
-            setTitle("Edição");
+            setTitle(getString(R.string.edit));
             edit = true;
         }
 
@@ -75,7 +75,7 @@ public class BigRockFormActivity extends AppCompatActivity {
 
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (locationManager == null || !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    Toast.makeText(getBaseContext(), "Sem sinal GPS!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), getString(R.string.validateGps), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -84,14 +84,14 @@ public class BigRockFormActivity extends AppCompatActivity {
                 BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
 
                 if (nmBigRock.getText().toString().isEmpty() || nmBigRock.getText().toString().length() < 4 || nmBigRock.getText().toString().length() > 20) {
-                    nmBigRock.setError("O nome da tarefa deve conter entre 4 e 20 caracteres!");
+                    nmBigRock.setError(getString(R.string.validadePassword));
                     return;
                 } else {
                     nmBigRock.setError(null);
                 }
 
                 if (dsBigRock.getText().toString().isEmpty() || dsBigRock.getText().toString().length() < 4 || dsBigRock.getText().toString().length() > 200) {
-                    dsBigRock.setError("A descrição da tarefa deve conter entre 4 e 200 caracteres!");
+                    dsBigRock.setError(getString(R.string.validateDescription));
                     return;
                 } else {
                     dsBigRock.setError(null);
@@ -153,9 +153,9 @@ public class BigRockFormActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.ckChecked:
                 if (checked) {
-                    tpStatus = "FINALIZADO";
+                    tpStatus = getString(R.string.tpStatusEnd);//"FINALIZADO";
                 } else {
-                    tpStatus = "INICIADO";
+                    tpStatus = getString(R.string.tpStatusInitial);//"INICIADO";
                 }
                 break;
         }

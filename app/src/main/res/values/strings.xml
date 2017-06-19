@@ -15,4 +15,24 @@
     <string name="view_all">Ver Todos</string>
     <string name="taskList">Lista de Tarefas</string>
     <string name="taskCreate">Criação</string>
+    <string name="bigRockApp">Big Rock</string>
+    <string name="name">Nome</string>
+    <string name="createAccont">Criar Conta</string>
+    <string name="youAreUser">Já é um usuário?</string>
+    <string name="noInternetAccess">Sem acesso a internet!</string>
+    <string name="noCanCreate">Não foi possível realizar o cadastro!</string>
+    <string name="validadeName">O nome deve conter no mínimo 3 caracteres!</string>
+    <string name="validadeEmail">Informe um endereço email válido!</string>
+    <string name="validadePassword">A senha deve conter entre 4 e 20 caracteres!</string>
+    <string name="validadeLogin">Não foi possível realizar o login!</string>
+    <string name="dsEnd">Finalizado?</string>
+    <string name="save">Salvar</string>
+    <string name="delete">Deletar</string>
+    <string name="validateDescription">A senha deve conter entre 4 e 200 caracteres!</string>
+    <string name="validateGps">Sem sinal GPS!</string>
+    <string name="edit">Edição</string>
+    <string name="tpStatusEnd">FINALIZADO</string>
+    <string name="tpStatusInitial">INICIADO</string>
+    <string name="viewCards">Visualizando minhas Tarefas</string>
+    <string name="viewAll">Visão Geral</string>
 </resources>

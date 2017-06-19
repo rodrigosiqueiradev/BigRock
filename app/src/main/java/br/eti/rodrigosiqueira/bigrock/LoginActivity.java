@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null || cm.getActiveNetworkInfo() == null || !cm.getActiveNetworkInfo().isConnected()) {
-            Toast.makeText(getBaseContext(), "Sem acesso a internet!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), getString(R.string.noInternetAccess), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         user.setPassword(edtPassword.getText().toString());
 
         if (!validate(user)) {
-            Toast.makeText(getBaseContext(), "Não foi possível realizar o login!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), getString(R.string.validadeLogin), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -77,14 +77,14 @@ public class LoginActivity extends AppCompatActivity {
         boolean valid = true;
 
         if (user.getEmail().isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(user.getEmail()).matches()) {
-            edtEmail.setError("Informe um endereço email válido!");
+            edtEmail.setError(getString(R.string.validadeEmail));
             valid = false;
         } else {
             edtEmail.setError(null);
         }
 
         if (user.getPassword().isEmpty() || user.getPassword().length() < 4 || user.getPassword().length() > 20) {
-            edtPassword.setError("A senha deve conter entre 4 e 20 caracteres!");
+            edtPassword.setError(getString(R.string.validadePassword));
             valid = false;
         } else {
             edtPassword.setError(null);

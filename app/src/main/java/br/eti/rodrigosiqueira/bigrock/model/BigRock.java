@@ -66,6 +66,6 @@ public class BigRock implements Serializable {
 
     @Override
     public String toString() {
-        return idBigRock + " " + nmBigRock;
+        return nmBigRock;
     }
 }
