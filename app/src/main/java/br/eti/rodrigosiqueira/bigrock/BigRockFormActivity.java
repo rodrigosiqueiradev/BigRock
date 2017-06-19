@@ -7,16 +7,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import br.eti.rodrigosiqueira.bigrock.dao.BigRockDAO;
 import br.eti.rodrigosiqueira.bigrock.model.BigRock;
@@ -24,8 +22,6 @@ import br.eti.rodrigosiqueira.bigrock.model.BigRock;
 public class BigRockFormActivity extends AppCompatActivity {
 
     private BigRock bigRock = new BigRock();
-    private String nmBigRock = new String();
-    private String dsBigRock = new String();
     private String tpStatus = new String();
     private Double latitude;
     private Double longitude;
@@ -45,11 +41,11 @@ public class BigRockFormActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Button btnSave = (Button) findViewById(R.id.btnSave);
-        Button btnDelete =  (Button) findViewById(R.id.btnDelete);
+        Button btnDelete = (Button) findViewById(R.id.btnDelete);
 
         Intent intent = getIntent();
         bigRock = (BigRock) intent.getSerializableExtra("bigRock");
-        if(bigRock == null) {
+        if (bigRock == null) {
             bigRock = new BigRock();
             edit = false;
         } else {
@@ -80,22 +76,19 @@ public class BigRockFormActivity extends AppCompatActivity {
                 EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
                 BigRockDAO bigRockDAO = new BigRockDAO(v.getContext());
 
-                Context context = getApplicationContext();
-                CharSequence text = "CAMPO OBRIGATORIO";
-                int duration = Toast.LENGTH_SHORT;
-
-                if(nmBigRock.getText().length() == 0 ) {
-                    Toast toast1 = Toast.makeText(context, text, duration);
-                    toast1.show();
+                if (nmBigRock.getText().toString().isEmpty() || nmBigRock.getText().toString().length() < 4 || nmBigRock.getText().toString().length() > 20) {
+                    nmBigRock.setError("O nome da tarefa deve conter entre 4 e 20 caracteres!");
                     return;
+                } else {
+                    nmBigRock.setError(null);
                 }
 
-                if(nmBigRock.getText().length() == 0 ) {
-                    Toast toast1 = Toast.makeText(context, text, duration);
-                    toast1.show();
+                if (dsBigRock.getText().toString().isEmpty() || dsBigRock.getText().toString().length() < 4 || dsBigRock.getText().toString().length() > 200) {
+                    dsBigRock.setError("A descrição da tarefa deve conter entre 4 e 200 caracteres!");
                     return;
+                } else {
+                    dsBigRock.setError(null);
                 }
-
 
                 bigRock.setNmBigRock(nmBigRock.getText().toString());
                 bigRock.setDsBigRock(dsBigRock.getText().toString());
@@ -103,15 +96,11 @@ public class BigRockFormActivity extends AppCompatActivity {
                 bigRock.setNrLat(latitude.toString());
                 bigRock.setNrLng(longitude.toString());
 
-
-
-
-                if(edit) {
+                if (edit) {
                     bigRock = bigRockDAO.updateBigRock(bigRock);
                 } else {
                     bigRock = bigRockDAO.insertBigRock(bigRock);
                 }
-
 
                 Intent newIntent = getIntent().putExtra("bigRock", bigRock);
                 setResult(RESULT_OK, newIntent);
@@ -131,9 +120,15 @@ public class BigRockFormActivity extends AppCompatActivity {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
             }
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            public void onProviderEnabled(String provider) {}
-            public void onProviderDisabled(String provider) {}
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
         };
 
         // Register the listener with the Location Manager to receive location updates
@@ -148,7 +143,7 @@ public class BigRockFormActivity extends AppCompatActivity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.ckChecked:
                 if (checked) {
                     tpStatus = "FINALIZADO";
