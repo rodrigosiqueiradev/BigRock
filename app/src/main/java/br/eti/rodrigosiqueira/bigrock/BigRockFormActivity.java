@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.eti.rodrigosiqueira.bigrock.dao.BigRockDAO;
 import br.eti.rodrigosiqueira.bigrock.model.BigRock;
@@ -71,6 +72,12 @@ public class BigRockFormActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (locationManager == null || !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Toast.makeText(getBaseContext(), "Sem sinal GPS!", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 EditText nmBigRock = (EditText) findViewById(R.id.nmBigRock);
                 EditText dsBigRock = (EditText) findViewById(R.id.dsBigRock);
